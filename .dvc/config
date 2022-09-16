@@ -1,0 +1,4 @@
+[core]
+    remote = bucketawstestrl1
+['remote "bucketawstestrl1"']
+    url = s3://bucketawstestrl1

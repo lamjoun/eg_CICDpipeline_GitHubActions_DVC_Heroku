@@ -1,7 +1,7 @@
 name: main_cicd
 on: 
- # []
- workflow_dispatch:
+ [push]
+ #workflow_dispatch:
 jobs:
   run:
     runs-on: [ubuntu-latest]

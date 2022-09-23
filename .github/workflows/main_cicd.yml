@@ -31,6 +31,6 @@ jobs:
          AWS_DEFAULT_REGION : eu-west-3
          AWS_DEFAULT_OUTPUT: json
         run: |
-          fleke8
-          pytest
+          flake8
+          pytest -v
        #--------oooooo--------#  

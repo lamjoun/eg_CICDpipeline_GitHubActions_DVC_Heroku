@@ -51,7 +51,7 @@ async def get_items():
     """
     GET on the root giving a welcome message.
     """
-    return {"message": "Hi, here function to predict Salary...."}
+    return {"message": "Hi, here function to predict Salary.."}
 
 
 @app.post('/test_salary_prediction')

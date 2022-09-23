@@ -1,0 +1,21 @@
+name: cicd_udacity_prj_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9.6
+  - pytest
+  - scikit-learn
+  - fastapi
+  - uvicorn
+  - pydantic
+  - numpy
+  - pandas
+  - dvc
+  - pip
+  - pip:
+      - requests
+      - flake8
+      - dvc_s3
+      - awscli
+ 

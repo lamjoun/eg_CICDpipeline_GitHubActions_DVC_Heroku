@@ -1,4 +1,5 @@
 [core]
     remote = bucketawstestrl1
+    autostage = true
 ['remote "bucketawstestrl1"']
     url = s3://bucketawstestrl1

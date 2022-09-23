@@ -1,0 +1,38 @@
+stages:
+  original_data:
+    cmd: python starter/dvc_src/original_data.py
+    outs:
+    - data_dvc/original_data.csv
+  cleaned_data:
+    cmd: python starter/dvc_src/cleaned_data.py
+    deps:
+    - data_dvc/census.csv
+    - starter/dvc_src/cleaned_data.py
+    outs:
+    - data_dvc/cleaned_data.csv
+  OneHot_encoder:
+    cmd: python starter/dvc_src/OneHot_encoder.py
+    deps:
+    - data_dvc/cleaned_data.csv
+    - starter/dvc_src/OneHot_encoder.py
+    params:
+    - test_size
+    outs:
+    - data_dvc/encoder.sav
+    - data_dvc/lb.sav
+    - data_dvc/test.csv
+    - data_dvc/train.csv
+  model:
+    cmd: python starter/dvc_src/model.py
+    deps:
+    - data_dvc/encoder.sav
+    - data_dvc/lb.sav
+    - data_dvc/test.csv
+    - data_dvc/train.csv
+    - starter/dvc_src/model.py
+    params:
+    - n_estimators
+    - n_jobs
+    - random_state
+    outs:
+    - data_dvc/rfc_model.sav

@@ -1,0 +1,37 @@
+data:
+  path_csv: 'data/census.csv'
+  repo_url: 'https://github.com/lamjoun/eg_CICDpipeline_GitHubActions_DVC_Heroku'
+  col_num: 15
+  columns_set_after_clean: {'education', 'sex', 'fnlgt', 'workclass', 'native-country', 'hours-per-week', 'salary',
+    'occupation', 'relationship', 'age', 'race', 'marital-status'}
+  salary_column_values: {'<=50K', '>50K'}
+  cat_features: [
+      "workclass",
+      "education",
+      "marital-status",
+      "occupation",
+      "relationship",
+      "race",
+      "sex",
+      "native-country"
+  ]
+
+model:
+  models_path: '/models/'
+  test_size: 0.20
+  folder_models: 'models'
+  data_test: {
+              "age": 38,
+              "work_class": "Private",
+              "fn_lgt": 76317,
+              "education": "Assoc-voc",
+              "marital_status": "Married-civ-spouse",
+              "occupation": " Exec-managerial",
+              "relationship": "Husband",
+              "race": "White",
+              "sex": "Male",
+              "hours_per_week": 55,
+              "native_country": "United-States"
+              }
+  expected_prediction_test: ">50K"   # ">50K"   "<=50K"
+  metrics: {'precision_min': 0.9, 'recall_min': 0.9, 'fbeta_min': 0.9}

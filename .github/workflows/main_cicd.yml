@@ -1,0 +1,36 @@
+name: main_cicd
+on: 
+ # []
+ workflow_dispatch:
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml-py3:latest
+    steps:
+      - uses: actions/checkout@v2
+      #--------oooooo--------#
+      - name: Cache Librairies
+        id: cache-libs
+        uses: actions/cache@v3
+        with:
+          path: ~/.savelib
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install requirements
+        if: ${{ steps.cache-libs.outputs.cache-hit != 'true' }}
+        continue-on-error: true
+        run:  pip install -r requirements.txt
+      #--------oooooo--------#          
+      - name: training
+        env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         AWS_DEFAULT_REGION : eu-west-3
+         AWS_DEFAULT_OUTPUT: json
+        run: |
+          fleke8
+          pytest
+       #--------oooooo--------#  

@@ -1,3 +1,15 @@
+<h1> Information </h1>
+
+Please note the following points:
+* The Github address of my project: https://github.com/lamjoun/eg_CICDpipeline_GitHubActions_DVC_Heroku
+* Access to the web app deployed with Heroku is via URLs:  https://census-case-via-heroku.herokuapp.com/ and https://census-case-via-heroku.herokuapp.com/docs
+* The /screenshots directory contains all the requested .png files 
+* The directory /metrics_output_files  contains the output.txt files corresponding to each of the categorical features. The script that generated these files is on the root: **metrics_compute_data_slices.py**
+
+========
+<h1> Project Pipeline Instructions </h1>
+
+
 Working in a command line environment is recommended for ease of use with git and dvc. If on Windows, WSL1 or 2 is recommended.
 
 # Environment Set up

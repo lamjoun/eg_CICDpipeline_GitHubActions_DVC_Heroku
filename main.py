@@ -8,7 +8,7 @@ import os
 import json
 import joblib
 import numpy as np
-from fastapi import FastAPI
+from fastapi import Body, FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 #
@@ -39,6 +39,23 @@ class ModelInput(BaseModel):
     sex: str
     hours_per_week: int
     native_country: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "age": 38,
+                "work_class": "Private",
+                "fn_lgt": 76317,
+                "education": "Assoc-voc",
+                "marital_status": "Married-civ-spouse",
+                "occupation": " Exec-managerial",
+                "relationship": "Husband",
+                "race": "White",
+                "sex": "Male",
+                "hours_per_week": 55,
+                "native_country": "United-States"
+            }
+        }
 
 
 list_clumns = ['age', 'work_class', 'fn_lgt', 'education', 'marital_status',
@@ -97,3 +114,51 @@ def test_salary_prediction(input_parameters: ModelInput):
     else:
         return "no decision!!"
 """
+
+
+@app.put("/test_salary_prediction")
+async def update_item(
+        *,
+        input_parameters: ModelInput = Body(
+            examples={
+                "Example_Case_sup_50K": {
+                    "summary": "A Salary result **>50k** example",
+                    "description": "A Salary result **>50k** example.",
+                    "value": {
+                        "age": 54,
+                        "work_class": "Private",
+                        "fn_lgt": 99185,
+                        "education": "Doctorate",
+                        "marital_status": "Married-civ-spouse",
+                        "occupation": "Prof-specialty",
+                        "relationship": "Husband",
+                        "race": "White",
+                        "sex": "Male",
+                        "hours_per_week": 45,
+                        "native_country": "United-States",
+                    },
+                },
+                "Example_Case_lower_50K": {
+                    "summary": "A Salary result **<=50k** example",
+                    "description": "A Salary result **<=50k** example.",
+                    "value": {
+                        "age": 40,
+                        "work_class": "Private",
+                        "fn_lgt": 76317,
+                        "education": "Assoc-voc",
+                        "marital_status": "Married-civ-spouse",
+                        "occupation": " Exec-managerial",
+                        "relationship": "Husband",
+                        "race": "White",
+                        "sex": "Male",
+                        "hours_per_week": 55,
+                        "native_country": "United-States",
+                    },
+                },
+            },
+        ),
+):
+    # results = { "item": ModelInput}
+    # return results
+
+    return test_salary_prediction(input_parameters)

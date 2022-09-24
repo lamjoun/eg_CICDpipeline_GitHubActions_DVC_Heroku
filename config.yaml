@@ -20,18 +20,5 @@ model:
   models_path: '/models/'
   test_size: 0.20
   folder_models: 'models'
-  data_test: {
-              "age": 38,
-              "work_class": "Private",
-              "fn_lgt": 76317,
-              "education": "Assoc-voc",
-              "marital_status": "Married-civ-spouse",
-              "occupation": " Exec-managerial",
-              "relationship": "Husband",
-              "race": "White",
-              "sex": "Male",
-              "hours_per_week": 55,
-              "native_country": "United-States"
-              }
   expected_prediction_test: ">50K"   # ">50K"   "<=50K"
   metrics: {'precision_min': 0.9, 'recall_min': 0.9, 'fbeta_min': 0.9}
